@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" colors="true"
+         convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true"
+         bootstrap="vendor/autoload.php">
+    <coverage>
+        <include>
+            <directory>./src/</directory>
+        </include>
+        <exclude>
+            <directory>./src/Resources/</directory>
+            <directory>./tests/</directory>
+            <directory>./vendor/</directory>
+        </exclude>
+    </coverage>
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <env name="APP_DEBUG" value="false"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+        <env name="XDEBUG_MODE" value="coverage"/>
+        <server name="KERNEL_CLASS" value="Tests\Functional\app\AppKernel"/>
+    </php>
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

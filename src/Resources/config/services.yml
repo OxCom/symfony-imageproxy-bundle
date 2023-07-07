@@ -1,0 +1,21 @@
+parameters:
+    symfony_imageproxy.provider.imgproxy.security.class: SymfonyImageProxyBundle\Providers\ImgProxy\Security
+    symfony_imageproxy.provider.imgproxy.builder.class: SymfonyImageProxyBundle\Providers\ImgProxy\Builder
+    symfony_imageproxy.provider.thumbor.security.class: SymfonyImageProxyBundle\Providers\Thumbor\Security
+    symfony_imageproxy.provider.thumbor.builder.class: SymfonyImageProxyBundle\Providers\Thumbor\Builder
+
+services:
+    SymfonyImageProxyBundle\Providers\ImgProxy\Security:
+        class: '%symfony_imageproxy.provider.imgproxy.security.class%'
+
+    SymfonyImageProxyBundle\Providers\ImgProxy\Builder:
+        public: true
+        class: '%symfony_imageproxy.provider.imgproxy.builder.class%'
+
+
+    SymfonyImageProxyBundle\Providers\Thumbor\Security:
+        class: '%symfony_imageproxy.provider.thumbor.security.class%'
+
+    SymfonyImageProxyBundle\Providers\Thumbor\Builder:
+        public: true
+        class: '%symfony_imageproxy.provider.thumbor.builder.class%'
