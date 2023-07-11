@@ -6,8 +6,8 @@ use SymfonyImageProxyBundle\Providers\ImageProxyBuilderInterface;
 
 class Builder implements ImageProxyBuilderInterface
 {
-    public function url(string $img, array $options = []): string
+    public function url(string $source, bool $secure = false): string
     {
-        return $img;
+        return $source;
     }
 }
