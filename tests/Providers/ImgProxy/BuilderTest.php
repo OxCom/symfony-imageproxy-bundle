@@ -263,4 +263,30 @@ class BuilderTest extends TestCase
             $url->zoom(0.33, 0.33)->toWebP()
         );
     }
+
+    public function testImageType()
+    {
+        $img      = 'https://awesome.com/awesome/image.jpg';
+        $security = new Security('617765736F6D65', '6F78636F6D');
+        $builder  = new Builder($security, 'conv.awesome.com');
+
+        $url = $builder
+            ->url($img)
+            ->resize(33);
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/rs:fit:33:0/plain/https://awesome.com/awesome/image.jpg@png',
+            $url->toPng()
+        );
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/rs:fit:33:0/plain/https://awesome.com/awesome/image.jpg@jpg',
+            $url->toJpeg()
+        );
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/rs:fit:33:0/plain/https://awesome.com/awesome/image.jpg@webp',
+            $url->toWebP()
+        );
+    }
 }
