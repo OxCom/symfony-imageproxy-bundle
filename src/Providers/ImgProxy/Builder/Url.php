@@ -9,6 +9,7 @@ use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Extend;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\ExtendAspectRatio;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Gravity;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Resize;
+use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\ResizeAlgo;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Zoom;
 use SymfonyImageProxyBundle\Providers\ImgProxy\ImgProxy;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Security;
@@ -30,9 +31,15 @@ class Url
         int $width = 0,
         int $height = 0,
         string $type = ImgProxy::RESIZE_TYPE_FIT,
-        string $algo = ImgProxy::RESIZE_ALGO_LANCZOS3
     ): self {
-        $this->process[Resize::class] = new Resize($width, $height, $type, $algo);
+        $this->process[Resize::class] = new Resize($width, $height, $type);
+
+        return $this;
+    }
+
+    public function resizeAlgo(string $algo): self
+    {
+        $this->process[ResizeAlgo::class] = new ResizeAlgo($algo);
 
         return $this;
     }

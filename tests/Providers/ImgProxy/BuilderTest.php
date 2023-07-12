@@ -217,8 +217,50 @@ class BuilderTest extends TestCase
         );
 
         self::assertEquals(
-            'https://conv.awesome.com/unsafe/rs:fit:33:42/plain/https://awesome.com/awesome/image.jpg@webp',
-            $url->toWebP()
+            'https://conv.awesome.com/unsafe/rs:fill:33:0/plain/https://awesome.com/awesome/image.jpg@webp',
+            $url->resize(33, 0, ImgProxy::RESIZE_TYPE_FILL)->toWebP()
+        );
+    }
+
+    public function testResizeAlgo()
+    {
+        $img      = 'https://awesome.com/awesome/image.jpg';
+        $security = new Security('617765736F6D65', '6F78636F6D');
+        $builder  = new Builder($security, 'conv.awesome.com');
+
+        $url = $builder
+            ->url($img)
+            ->resize(33, 42)
+            ->resizeAlgo(ImgProxy::RESIZE_ALGO_NEAREST)
+            ->toWebP();
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/rs:fit:33:42/ra:nearest/plain/https://awesome.com/awesome/image.jpg@webp',
+            $url
+        );
+    }
+
+    public function testZoom()
+    {
+        $img      = 'https://awesome.com/awesome/image.jpg';
+        $security = new Security('617765736F6D65', '6F78636F6D');
+        $builder  = new Builder($security, 'conv.awesome.com');
+
+        $url = $builder->url($img);
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/z:0.5/plain/https://awesome.com/awesome/image.jpg@webp',
+            $url->zoom(0.5)->toWebP()
+        );
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/z:0.5:0.7/plain/https://awesome.com/awesome/image.jpg@webp',
+            $url->zoom(0.5,0.7)->toWebP()
+        );
+
+        self::assertEquals(
+            'https://conv.awesome.com/unsafe/z:0.33/plain/https://awesome.com/awesome/image.jpg@webp',
+            $url->zoom(0.33, 0.33)->toWebP()
         );
     }
 }
