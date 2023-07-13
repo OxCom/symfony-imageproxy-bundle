@@ -1,6 +1,7 @@
 <?php
 
 namespace SymfonyImageProxyBundle\Providers\ImgProxy;
+
 class Security
 {
     private string $key;
@@ -8,7 +9,7 @@ class Security
 
     public function __construct(string $key, string $salt, private readonly int $size = 32)
     {
-        if (\mb_strlen($key) > 0) {
+        if ($key !== '') {
             try {
                 $this->key = \pack('H', \mb_strtoupper($key));
             } catch (\Throwable $e) {
@@ -16,7 +17,7 @@ class Security
             }
         }
 
-        if (\mb_strlen($salt) > 0) {
+        if ($salt !== '') {
             try {
                 $this->salt = \pack('H', \mb_strtoupper($salt));
             } catch (\Throwable $e) {

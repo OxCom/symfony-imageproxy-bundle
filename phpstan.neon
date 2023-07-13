@@ -1,0 +1,21 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+
+parameters:
+    level: 1
+
+    paths:
+        - src
+    excludePaths:
+        - tests
+        - var
+        - vendor
+
+    parallel:
+        jobSize: 32
+        maximumNumberOfProcesses: 64
+        minimumNumberOfJobsPerProcess: 4
+
+    symfony:
+        containerXmlPath: var/cache/test/App_KernelDevDebugContainer.xml

@@ -6,7 +6,7 @@ use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\ProcessOptionInterface;
 
 class Zoom implements ProcessOptionInterface
 {
-    private const ZOOM_TPL = 'z:%zoom_x_y';
+    private const ZOOM_TPL    = 'z:%zoom_x_y';
     private const ZOOM_XY_TPL = 'z:%zoom_x:%zoom_y';
 
     public function __construct(protected string $zoomX = "1", protected ?string $zoomY = null)
@@ -33,11 +33,13 @@ class Zoom implements ProcessOptionInterface
     public function compile(): string
     {
         $equal = $this->zoomX === $this->zoomY;
-        $tpl = $equal ? self::ZOOM_TPL : self::ZOOM_XY_TPL;
+        $tpl   = $equal ? self::ZOOM_TPL : self::ZOOM_XY_TPL;
 
-        return \strtr($tpl, $equal
-            ? ['%zoom_x_y' => $this->zoomX]
-            : ['%zoom_x' => $this->zoomX, '%zoom_y' => $this->zoomY]
+        return \strtr(
+            $tpl,
+            $equal
+                ? ['%zoom_x_y' => $this->zoomX]
+                : ['%zoom_x' => $this->zoomX, '%zoom_y' => $this->zoomY]
         );
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="encoding" value="utf8" />
+
+    <rule ref="PSR12" />
+
+    <rule ref="SlevomatCodingStandard.PHP.OptimizedFunctionsWithoutUnpacking"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions">
+        <properties>
+            <property name="includeSpecialFunctions" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+      <properties>
+        <property name="forbiddenFunctions" type="array" value="eval=>null,dd=>null,sizeof=>count,delete=>unset,print=>echo,dump=>null,var_dump=>null,create_function=>null,eval=>null,system=>null"/>
+      </properties>
+    </rule>
+
+    <file>src/</file>
+</ruleset>
