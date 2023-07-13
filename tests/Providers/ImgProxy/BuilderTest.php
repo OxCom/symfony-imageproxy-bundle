@@ -132,7 +132,7 @@ class BuilderTest extends TestCase
         );
     }
 
-    public function generateDpr(bool $secure, string $sign)
+    public function generateDpr()
     {
         return [
             [false, 'unsafe'],
@@ -423,7 +423,7 @@ class BuilderTest extends TestCase
         $builder  = new Builder($security, 'conv.awesome.com');
 
         $url = $builder
-            ->url($img)
+            ->url($img, $secure)
             ->resize(33)
             ->{$toType}();
 
@@ -439,6 +439,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'toPng', 'png'],
             [false, 'unsafe', 'toJpeg', 'jpg'],
             [false, 'unsafe', 'toWebP', 'webp'],
+            [true, 'f4hbRvgnEA3oKFlRPNnPhbHnOLKNWBr-b6tem3y4-F8', 'toPng', 'png'],
+            [true, 'WKw4gcv31OlYKJR23MMCzgvNdvg36YuIz_ynJ0dHWo8', 'toJpeg', 'jpg'],
+            [true, '2nfqtrOsPhesVatbaWIxzPZSNEFPaPILAH9MM2uwZh0', 'toWebP', 'webp'],
         ];
     }
 }
