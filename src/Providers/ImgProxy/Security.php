@@ -8,16 +8,20 @@ class Security
 
     public function __construct(string $key, string $salt, private readonly int $size = 32)
     {
-        try {
-            $this->key = \pack('H', \mb_strtoupper($key));
-        } catch (\Throwable $e) {
-            throw new \InvalidArgumentException('The sign key must be hex-encoded string', $e->getCode(), $e);
+        if (\mb_strlen($key) > 0) {
+            try {
+                $this->key = \pack('H', \mb_strtoupper($key));
+            } catch (\Throwable $e) {
+                throw new \InvalidArgumentException('The sign key must be hex-encoded string', $e->getCode(), $e);
+            }
         }
 
-        try {
-            $this->salt = \pack('H', \mb_strtoupper($salt));
-        } catch (\Throwable $e) {
-            throw new \InvalidArgumentException('The sign key must be hex-encoded string', $e->getCode(), $e);
+        if (\mb_strlen($salt) > 0) {
+            try {
+                $this->salt = \pack('H', \mb_strtoupper($salt));
+            } catch (\Throwable $e) {
+                throw new \InvalidArgumentException('The sign key must be hex-encoded string', $e->getCode(), $e);
+            }
         }
     }
 
@@ -38,7 +42,7 @@ class Security
      */
     private function encode(string $payload): string
     {
-        return \rtrim(\strtr(\base64_encode($payload), '+/', '-_'), '=');
+        return Encoder::encode($payload);
     }
 
     /**
@@ -46,6 +50,6 @@ class Security
      */
     private function crop(string $signature)
     {
-        return \substr($signature, 0, $this->size);
+        return \pack('A' . $this->size, $signature);
     }
 }

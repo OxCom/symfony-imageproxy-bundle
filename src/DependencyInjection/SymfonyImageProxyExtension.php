@@ -7,8 +7,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Reference;
-use SymfonyImageProxyBundle\Providers\ImgProxy\Builder;
-use SymfonyImageProxyBundle\Providers\ImgProxy\Security;
+use SymfonyImageProxyBundle\Providers\ImgProxy\Builder as ImgProxyBuilder;
+use SymfonyImageProxyBundle\Providers\ImgProxy\Security as ImgProxySecurity;
+use SymfonyImageProxyBundle\Providers\Thumbor\Builder as ThumborBuilder;
+use SymfonyImageProxyBundle\Providers\Thumbor\Security as ThumborSecurity;
 
 class SymfonyImageProxyExtension extends Extension
 {
@@ -21,6 +23,7 @@ class SymfonyImageProxyExtension extends Extension
         $loader->load('services.yml');
 
         $this->configureImgProxy($container, $config);
+        $this->configureThumbor($container, $config);
     }
 
     private function configureImgProxy(ContainerBuilder $container, array $config)
@@ -31,17 +34,37 @@ class SymfonyImageProxyExtension extends Extension
             return;
         }
 
-        $dSecurity = $container->getDefinition(Security::class);
+        $dSecurity = $container->getDefinition(ImgProxySecurity::class);
         $dSecurity->setArguments([
             $config['key'] ?? '',
             $config['salt'] ?? ''
         ]);
 
-        $dUrlBuilder = $container->getDefinition(Builder::class);
+        $dUrlBuilder = $container->getDefinition(ImgProxyBuilder::class);
         $dUrlBuilder->setArguments([
-            new Reference(Security::class),
+            new Reference(ImgProxySecurity::class),
             $config['host'] ?? 'localhost',
         ]);
     }
 
+    private function configureThumbor(ContainerBuilder $container, array $config)
+    {
+        $config = $config['thumbor'] ?? [];
+
+        if (empty($config)) {
+            return;
+        }
+
+        $dSecurity = $container->getDefinition(ThumborSecurity::class);
+        $dSecurity->setArguments([
+            $config['key'] ?? '',
+            $config['salt'] ?? ''
+        ]);
+
+        $dUrlBuilder = $container->getDefinition(ThumborBuilder::class);
+        $dUrlBuilder->setArguments([
+            new Reference(ThumborSecurity::class),
+            $config['host'] ?? 'localhost',
+        ]);
+    }
 }

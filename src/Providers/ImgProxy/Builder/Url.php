@@ -11,11 +11,14 @@ use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Gravity;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Resize;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\ResizeAlgo;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Builder\Processing\Zoom;
+use SymfonyImageProxyBundle\Providers\ImgProxy\Encoder;
 use SymfonyImageProxyBundle\Providers\ImgProxy\ImgProxy;
 use SymfonyImageProxyBundle\Providers\ImgProxy\Security;
 
 class Url
 {
+    public const SOURCE_ENCODED_CHUNK_SIZE = 42;
+
     protected array $process = [];
 
     public function __construct(
@@ -113,34 +116,54 @@ class Url
         return $this;
     }
 
-    public function toPng(): string
+    public function toPng(string $type = ImgProxy::SOURCE_TYPE_BASE64): string
     {
-        return $this->build('png');
+        return $this->build('png', $type);
     }
 
-    public function toJpeg(): string
+    public function toJpeg(string $type = ImgProxy::SOURCE_TYPE_BASE64): string
     {
-        return $this->build('jpg');
+        return $this->build('jpg', $type);
     }
 
-    public function toWebP(): string
+    public function toWebP(string $type = ImgProxy::SOURCE_TYPE_BASE64): string
     {
-        return $this->build('webp');
+        return $this->build('webp', $type);
     }
 
-    protected function build(string $format): string
+    protected function build(string $format, string $type = ImgProxy::SOURCE_TYPE_BASE64): string
     {
         $options = \array_map(static fn ($p) => $p->compile(), $this->process);
         $options = \implode('/', $options);
 
         $request = \implode('/', [
             $options,
-            'plain',
-            $this->source . '@' . $format,
+            $this->encodeSource($type) . $format,
         ]);
 
         $sign = $this->security ? $this->security->sign($request) : 'unsafe';
 
         return $this->host . '/' . $sign . '/' . $request;
+    }
+
+    protected function encodeSource(string $type): string
+    {
+        switch ($type) {
+            case ImgProxy::SOURCE_TYPE_BASE64:
+                $source = Encoder::encode($this->source);
+                $source = \implode('/', \str_split($source, self::SOURCE_ENCODED_CHUNK_SIZE));
+                $source .= '.';
+                break;
+
+            case ImgProxy::SOURCE_TYPE_PLAIN:
+                // TODO: Escape the source URL if it contains a query string or @
+                $source = "plain/{$this->source}@";
+                break;
+
+            default:
+                throw new \InvalidArgumentException('Source encoding type is invalid.');
+        }
+
+        return $source;
     }
 }

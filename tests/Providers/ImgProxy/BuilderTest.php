@@ -14,16 +14,16 @@ class BuilderTest extends TestCase
 
     public function testReturnUrlObject()
     {
-        $img = 'https://awesome.com/awesome/image.jpg';
+        $img      = 'https://awesome.com/awesome/image.jpg';
         $security = new Security('617765736F6D65', '6F78636F6D');
-        $builder = new Builder($security, 'conv.awesome.com');
+        $builder  = new Builder($security, 'conv.awesome.com');
 
         $url = $builder->url($img);
 
         $data = $this->getObjectProperties($url, [
             'source',
             'host',
-            'security'
+            'security',
         ]);
 
         self::assertEquals($img, $data['source']);
@@ -42,7 +42,7 @@ class BuilderTest extends TestCase
         $data = $this->getObjectProperties($url, [
             'source',
             'host',
-            'security'
+            'security',
         ]);
 
         self::assertEquals($img, $data['source']);
@@ -53,7 +53,7 @@ class BuilderTest extends TestCase
     /**
      * @dataProvider generateCrop
      */
-    public function testCrop(bool $secure, string $sign)
+    public function testCrop(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -64,10 +64,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->crop(33, 42)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/c:33:42/plain/{$img}@webp",
+            "https://{$host}/{$sign}/c:33:42/{$encImg}",
             $url
         );
     }
@@ -75,15 +75,27 @@ class BuilderTest extends TestCase
     public function generateCrop()
     {
         return [
-            [false, 'unsafe'],
-            [true, '4ZuzK5flQncpAJTm06kNLZgjfBF9Uvg-9IbzUzgQiFU'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                '4ZuzK5flQncpAJTm06kNLZgjfBF9Uvg-9IbzUzgQiFU',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'ZDEAv4k8CrDcXwcOeqNkb5zK3pdyF8k21KIT_zlQ8zM',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateCropGravity
      */
-    public function testCropGravity(bool $secure, string $sign)
+    public function testCropGravity(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -94,10 +106,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->crop(33, 42, ImgProxy::GRAVITY_NORTH_EAST, 77, 101)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/c:33:42:noea:77:101/plain/{$img}@webp",
+            "https://{$host}/{$sign}/c:33:42:noea:77:101/{$encImg}",
             $url
         );
     }
@@ -105,15 +117,27 @@ class BuilderTest extends TestCase
     public function generateCropGravity()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'WhFQ9qDT8x7AJ-kkZ8r1B2FGZR4cBxC5nAl-Tn2fRlk'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'WhFQ9qDT8x7AJ-kkZ8r1B2FGZR4cBxC5nAl-Tn2fRlk',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'VZDWTO4t5emfTedoHXDlRjThxFmUOIoGVvysZLDvF0E',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateDpr
      */
-    public function testDpr(bool $secure, string $sign)
+    public function testDpr(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -124,10 +148,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->dpr(0.33)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/dpr:0.33/plain/{$img}@webp",
+            "https://{$host}/{$sign}/dpr:0.33/{$encImg}",
             $url
         );
     }
@@ -135,15 +159,27 @@ class BuilderTest extends TestCase
     public function generateDpr()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'rvd5ARX2BnIEUX-YdG6pjW9sJJxtObJeq-7qqasvVB0']
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'rvd5ARX2BnIEUX-YdG6pjW9sJJxtObJeq-7qqasvVB0',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                '1w7nIfoTrCIIQPBl71RkQ368qXXImiVPVEe1gVCpG98',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateEnlarge
      */
-    public function testEnlarge(bool $secure, string $sign)
+    public function testEnlarge(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -154,10 +190,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->enlarge()
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/el:1/plain/{$img}@webp",
+            "https://{$host}/{$sign}/el:1/{$encImg}",
             $url
         );
     }
@@ -165,15 +201,27 @@ class BuilderTest extends TestCase
     public function generateEnlarge()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'KusQZACqKGtRROqNRw9XI-FymSN5_jF1Uf5vw9o6fAY'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'KusQZACqKGtRROqNRw9XI-FymSN5_jF1Uf5vw9o6fAY',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'WivjLnXvjCvdIxgwa5HSTEgbOQimJYB6K0WgPNrUjhw',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateExtend
      */
-    public function testExtend(bool $secure, string $sign)
+    public function testExtend(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -184,10 +232,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->extend()
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/ex:1/plain/{$img}@webp",
+            "https://{$host}/{$sign}/ex:1/{$encImg}",
             $url
         );
     }
@@ -195,15 +243,27 @@ class BuilderTest extends TestCase
     public function generateExtend()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'fIMZOe6sFyHfg7nOPC1RE2n5FPnGUN0cF_XAc73iciE'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'fIMZOe6sFyHfg7nOPC1RE2n5FPnGUN0cF_XAc73iciE',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'ws3sBthJ0pC3mgQLzZAbtyJJA1MkF4x38e416US-B6c',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateExtendGravity
      */
-    public function testExtendGravity(bool $secure, string $sign)
+    public function testExtendGravity(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -214,10 +274,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->extend(ImgProxy::GRAVITY_WEST, 42, 32)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/ex:1:we:42:32/plain/{$img}@webp",
+            "https://{$host}/{$sign}/ex:1:we:42:32/{$encImg}",
             $url
         );
     }
@@ -225,15 +285,27 @@ class BuilderTest extends TestCase
     public function generateExtendGravity()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'cjrByJoooiA-fuulQXeyYQ__PCswuFgUc9IFRCTCQas'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'cjrByJoooiA-fuulQXeyYQ__PCswuFgUc9IFRCTCQas',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'x--ZvCZEDxLDm--6BMFQ_SOmWbRdtl55mfR4z7Mpbfc',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateExtendAspectRatio
      */
-    public function testExtendAspectRatio(bool $secure, string $sign)
+    public function testExtendAspectRatio(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -244,10 +316,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->extendAspectRatio()
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/exar:1/plain/{$img}@webp",
+            "https://{$host}/{$sign}/exar:1/{$encImg}",
             $url
         );
     }
@@ -255,15 +327,27 @@ class BuilderTest extends TestCase
     public function generateExtendAspectRatio()
     {
         return [
-            [false, 'unsafe'],
-            [true, '6QtWBzsJzMgYlZp3skIw1yqlUiOzBkLCqi3Yka9ZfFg'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                '6QtWBzsJzMgYlZp3skIw1yqlUiOzBkLCqi3Yka9ZfFg',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'mLtLRKOlWlUOetwm2dDDDCsnS4JJRBCtxaDdMk8IMoo',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateExtendAspectRatioGravity
      */
-    public function testExtendAspectRatioGravity(bool $secure, string $sign)
+    public function testExtendAspectRatioGravity(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -274,10 +358,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->extendAspectRatio(ImgProxy::GRAVITY_WEST, 42, 32)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/exar:1:we:42:32/plain/{$img}@webp",
+            "https://{$host}/{$sign}/exar:1:we:42:32/{$encImg}",
             $url
         );
     }
@@ -285,15 +369,27 @@ class BuilderTest extends TestCase
     public function generateExtendAspectRatioGravity()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'IYf2dFQH2b0h5-EZWdfnmQ2p5-DIWvdIQ32mJK7CtOw'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'IYf2dFQH2b0h5-EZWdfnmQ2p5-DIWvdIQ32mJK7CtOw',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'UeX7qMDFxjxrja21_UlTeDNd3-aoFtXgk6MFngLrKCw',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
     /**
      * @dataProvider generateGravity
      */
-    public function testGravity(bool $secure, string $sign)
+    public function testGravity(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -304,10 +400,10 @@ class BuilderTest extends TestCase
         $url = $builder
             ->url($img, $secure)
             ->gravity(ImgProxy::GRAVITY_WEST, 42, 32)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/g:we:42:32/plain/{$img}@webp",
+            "https://{$host}/{$sign}/g:we:42:32/{$encImg}",
             $url
         );
     }
@@ -315,8 +411,20 @@ class BuilderTest extends TestCase
     public function generateGravity()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'pvUSHMEoxBpdO04lSb86hVute9llZ5Je8KMrPZkqQ1o'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'pvUSHMEoxBpdO04lSb86hVute9llZ5Je8KMrPZkqQ1o',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'jqagygpgF6xWEEHfMAYvTFedqjmEbyNZf1_-G-6tr2g',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
@@ -334,7 +442,7 @@ class BuilderTest extends TestCase
         $url = $builder->url($img, $secure);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/rs:{$type}:33:42/plain/{$img}@webp",
+            "https://{$host}/{$sign}/rs:{$type}:33:42/aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp",
             $url->resize(33, 42, $type)->toWebP()
         );
     }
@@ -344,15 +452,15 @@ class BuilderTest extends TestCase
         return [
             [false, 'unsafe', ImgProxy::RESIZE_TYPE_FIT],
             [false, 'unsafe', ImgProxy::RESIZE_TYPE_FILL],
-            [true, 't_itJJxpz7xn29uXsw94hoPAgtjoH1ndjDcVpzqYvjs', ImgProxy::RESIZE_TYPE_FIT],
-            [true, 'w5OhxTUBsyWSAyYBKLM5XmD0gKQC0HBIXte2WKdzGas', ImgProxy::RESIZE_TYPE_FILL],
+            [true, 'bAdpOGNzrgE8q2SHx6r9reD-dknZHEoSGRp9X1aUdXM', ImgProxy::RESIZE_TYPE_FIT],
+            [true, 'UPaXrIMHuY-Or_qibSLlfg0wV2QnIcShX0i0hB3ST9c', ImgProxy::RESIZE_TYPE_FILL],
         ];
     }
 
     /**
      * @dataProvider generateResizeAlgo
      */
-    public function testResizeAlgo(bool $secure, string $sign)
+    public function testResizeAlgo(bool $secure, string $sign, string $type, string $encImg)
     {
         $host = 'conv.awesome.com';
         $img  = 'https://awesome.com/awesome/image.jpg';
@@ -364,10 +472,10 @@ class BuilderTest extends TestCase
             ->url($img, $secure)
             ->resize(33, 42)
             ->resizeAlgo(ImgProxy::RESIZE_ALGO_NEAREST)
-            ->toWebP();
+            ->toWebP($type);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/rs:fit:33:42/ra:nearest/plain/{$img}@webp",
+            "https://{$host}/{$sign}/rs:fit:33:42/ra:nearest/{$encImg}",
             $url
         );
     }
@@ -375,8 +483,20 @@ class BuilderTest extends TestCase
     public function generateResizeAlgo()
     {
         return [
-            [false, 'unsafe'],
-            [true, 'gZySmmOp7MjA2pUDCakkhrvmO7BnWfldVDK_53o0u3k'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_PLAIN, 'plain/https://awesome.com/awesome/image.jpg@webp'],
+            [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
+            [
+                true,
+                'gZySmmOp7MjA2pUDCakkhrvmO7BnWfldVDK_53o0u3k',
+                ImgProxy::SOURCE_TYPE_PLAIN,
+                'plain/https://awesome.com/awesome/image.jpg@webp',
+            ],
+            [
+                true,
+                'IaW0BovXjOMZAzC9edAIOy2Gf2XCuNbkt3bTzjnH2Y4',
+                ImgProxy::SOURCE_TYPE_BASE64,
+                'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
+            ],
         ];
     }
 
@@ -394,7 +514,7 @@ class BuilderTest extends TestCase
         $url = $builder->url($img, $secure);
 
         self::assertEquals(
-            "https://{$host}/{$sign}/{$zoom}/plain/{$img}@webp",
+            "https://{$host}/{$sign}/{$zoom}/aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp",
             $url->zoom($x, $y)->toWebP()
         );
     }
@@ -405,9 +525,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'z:0.5', 0.5, null],
             [false, 'unsafe', 'z:0.5:0.7', 0.5, 0.7],
             [false, 'unsafe', 'z:0.33', 0.33, 0.33],
-            [true, '89dxf-LVEaWoZ94YqYhxrFfEnwT_9Ycltf6ogL0ZKTo', 'z:0.5', 0.5, null],
-            [true, 'TzzGWtsfGHicel4-Um_wEdKQj8J-y02UWFlKJAfT3W0', 'z:0.5:0.7', 0.5, 0.7],
-            [true, 'GIVMg-A9hW6KDaHL6tBiNO3GfTCLBCIL_XQwBwzbAXI', 'z:0.33', 0.33, 0.33],
+            [true, 'sNFs_ZM5cBSSRXb6hZsbyzPYUhx6P4xJseppd4MIeYc', 'z:0.5', 0.5, null],
+            [true, 'RNi4R9HNy-uZ7IfsAGh4zPxBWM4_9uETOGaLjjZWQqY', 'z:0.5:0.7', 0.5, 0.7],
+            [true, 'xc_MFz4udqxjn-tkJ7yBwhWX1J9MLft9Puiw8jfUcK8', 'z:0.33', 0.33, 0.33],
         ];
     }
 
@@ -428,7 +548,7 @@ class BuilderTest extends TestCase
             ->{$toType}();
 
         self::assertEquals(
-            "https://{$host}/{$sign}/rs:fit:33:0/plain/{$img}@{$ext}",
+            "https://{$host}/{$sign}/rs:fit:33:0/aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.{$ext}",
             $url
         );
     }
@@ -439,9 +559,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'toPng', 'png'],
             [false, 'unsafe', 'toJpeg', 'jpg'],
             [false, 'unsafe', 'toWebP', 'webp'],
-            [true, 'f4hbRvgnEA3oKFlRPNnPhbHnOLKNWBr-b6tem3y4-F8', 'toPng', 'png'],
-            [true, 'WKw4gcv31OlYKJR23MMCzgvNdvg36YuIz_ynJ0dHWo8', 'toJpeg', 'jpg'],
-            [true, '2nfqtrOsPhesVatbaWIxzPZSNEFPaPILAH9MM2uwZh0', 'toWebP', 'webp'],
+            [true, '6ZwNkrNUfCyPIB20pjsJSEvVxpAqo2y_K07j9fwL4vA', 'toPng', 'png'],
+            [true, 'ujhiDwdFuobz7gVIbodu6qYnlvtv5dqZde0K4u4632E', 'toJpeg', 'jpg'],
+            [true, '8bG3BQeX_0CfrQyUufqJ1xe_ERMsuaMtnQXS3qWONJ8', 'toWebP', 'webp'],
         ];
     }
 
@@ -469,7 +589,7 @@ class BuilderTest extends TestCase
         $options = 'g:noea:3:7/el:1/ex:1:ce:33:42/c:1024:786/rs:force:768:0/z:0.33';
 
         self::assertEquals(
-            "https://{$host}/{$sign}/{$options}/plain/{$img}@{$ext}",
+            "https://{$host}/{$sign}/{$options}/aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.{$ext}",
             $url
         );
     }
@@ -480,6 +600,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'toPng', 'png'],
             [false, 'unsafe', 'toJpeg', 'jpg'],
             [false, 'unsafe', 'toWebP', 'webp'],
+            [true, 'ednUiSeCvzf3vDi8Eu5ag8btNC4dh2HlgxPc3SPu8GM', 'toPng', 'png'],
+            [true, 'IRdxxLt4cpMIyXejdaFixyP5duHGtRsxZp_gRygnUr8', 'toJpeg', 'jpg'],
+            [true, 'wqauSTfykiNRShXvrXrEwg7QRKekEWXJvVzvzewoEW4', 'toWebP', 'webp'],
         ];
     }
 }

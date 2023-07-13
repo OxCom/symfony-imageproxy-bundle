@@ -1,8 +1,8 @@
 symfony_image_proxy:
     imgproxy:
         host: 'conv.imgproxy.awesome.com'
-        key: 'IMGPR0XYKEY'
-        salt: 'IMGPROXYSALT'
+        key: '617765736F6D65'
+        salt: '6F78636F6D'
 
     thumbor:
         host: 'conv.thumbor.awesome.com'

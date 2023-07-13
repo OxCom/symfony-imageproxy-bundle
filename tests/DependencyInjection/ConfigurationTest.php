@@ -59,7 +59,7 @@ class ConfigurationTest extends KernelTestCase
             'host'
         ]);
 
-        self::assertEquals('conv.imgproxy.awesome.com', $props['host']);
+        self::assertEquals('conv.thumbor.awesome.com', $props['host']);
         self::assertInstanceOf(ThumborSecurity::class, $props['security']);
     }
 

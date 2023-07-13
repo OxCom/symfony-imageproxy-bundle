@@ -25,4 +25,7 @@ class ImgProxy
     public const GRAVITY_NORTH_WEST = 'nowe';
     public const GRAVITY_SOUTH_EAST = 'soea';
     public const GRAVITY_SOUTH_WEST = 'sowe';
+
+    public const SOURCE_TYPE_PLAIN = 'plain';
+    public const SOURCE_TYPE_BASE64 = 'base64';
 }
