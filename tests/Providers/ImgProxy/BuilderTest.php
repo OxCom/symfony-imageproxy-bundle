@@ -444,4 +444,42 @@ class BuilderTest extends TestCase
             [true, '2nfqtrOsPhesVatbaWIxzPZSNEFPaPILAH9MM2uwZh0', 'toWebP', 'webp'],
         ];
     }
+
+    /**
+     * @dataProvider generateComplexBuildProcess
+     */
+    public function testComplexBuildProcess(bool $secure, string $sign, string $toType, string $ext)
+    {
+        $host = 'conv.awesome.com';
+        $img  = 'https://awesome.com/awesome/image.jpg';
+
+        $security = new Security('617765736F6D65', '6F78636F6D');
+        $builder  = new Builder($security, 'conv.awesome.com');
+
+        $url = $builder
+            ->url($img, $secure)
+            ->gravity(ImgProxy::GRAVITY_NORTH_EAST, 3, 7)
+            ->enlarge()
+            ->extend(ImgProxy::GRAVITY_CENTER, 33, 42)
+            ->crop(1024, 786)
+            ->resize(768, 0, ImgProxy::RESIZE_TYPE_FORCE)
+            ->zoom(0.33)
+            ->{$toType}();
+
+        $options = 'g:noea:3:7/el:1/ex:1:ce:33:42/c:1024:786/rs:force:768:0/z:0.33';
+
+        self::assertEquals(
+            "https://{$host}/{$sign}/{$options}/plain/{$img}@{$ext}",
+            $url
+        );
+    }
+
+    public function generateComplexBuildProcess()
+    {
+        return [
+            [false, 'unsafe', 'toPng', 'png'],
+            [false, 'unsafe', 'toJpeg', 'jpg'],
+            [false, 'unsafe', 'toWebP', 'webp'],
+        ];
+    }
 }
