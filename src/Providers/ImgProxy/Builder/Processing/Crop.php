@@ -16,18 +16,6 @@ class Crop implements ProcessOptionInterface
     ) {
     }
 
-    public function gravity(Gravity $gravity): self
-    {
-        $this->gravity = $gravity;
-
-        return $this;
-    }
-
-    public function hasGravity(): bool
-    {
-        return !empty($this->gravity);
-    }
-
     public function compile(): string
     {
         $tpl     = $this->gravity ? self::CROP_GRAVITY_TPL : self::CROP_TPL;

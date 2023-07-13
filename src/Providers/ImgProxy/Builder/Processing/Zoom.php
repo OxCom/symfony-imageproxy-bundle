@@ -11,9 +11,7 @@ class Zoom implements ProcessOptionInterface
 
     public function __construct(protected string $zoomX = "1", protected ?string $zoomY = null)
     {
-        if (\is_null($this->zoomY)) {
-            $this->zoomY = $this->zoomX;
-        }
+        $this->zoomY = \is_null($this->zoomY) ? $this->zoomX : $this->zoomY;
 
         if (!\is_numeric($this->zoomX)) {
             throw new \InvalidArgumentException('Zoom multiplier X must be numeric.');
