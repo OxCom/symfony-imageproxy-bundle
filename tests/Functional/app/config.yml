@@ -8,3 +8,6 @@ symfony_image_proxy:
         host: 'conv.thumbor.awesome.com'
         key: 'THUMBORKEY'
         salt: 'THUMBORSALT'
+
+framework:
+    http_method_override: false

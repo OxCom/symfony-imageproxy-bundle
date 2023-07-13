@@ -14,7 +14,7 @@ use SymfonyImageProxyBundle\Providers\Thumbor\Security as ThumborSecurity;
 
 class SymfonyImageProxyExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -26,7 +26,7 @@ class SymfonyImageProxyExtension extends Extension
         $this->configureThumbor($container, $config);
     }
 
-    private function configureImgProxy(ContainerBuilder $container, array $config)
+    private function configureImgProxy(ContainerBuilder $container, array $config): void
     {
         $config = $config['imgproxy'] ?? [];
 
@@ -47,7 +47,7 @@ class SymfonyImageProxyExtension extends Extension
         ]);
     }
 
-    private function configureThumbor(ContainerBuilder $container, array $config)
+    private function configureThumbor(ContainerBuilder $container, array $config): void
     {
         $config = $config['thumbor'] ?? [];
 
