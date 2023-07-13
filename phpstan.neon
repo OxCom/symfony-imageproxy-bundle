@@ -16,6 +16,3 @@ parameters:
         jobSize: 32
         maximumNumberOfProcesses: 64
         minimumNumberOfJobsPerProcess: 4
-
-    symfony:
-        containerXmlPath: var/cache/test/App_KernelDevDebugContainer.xml
