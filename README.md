@@ -13,3 +13,5 @@ Tools:
 - Handle ``@`` and query strings on URL for ImgProxy provider
 - Add ``Thumbor`` support
 - Provide integration tests
+- Check possible support for Symfony 5.x
+- Check possible support for PHP7.4
