@@ -44,7 +44,7 @@ class SecurityTest extends TestCase
 
         $signature = $s->sign($payload);
 
-        self::assertEquals('cG5bAdaEMad0FFsvykeU-BxWXvCBQFuHNk8twTgbRRM', $signature);
+        self::assertEquals('T5v8rp-cI42Iq_ycqYt3y9iYcxHKcGiKkID4KIJblmU', $signature);
         self::assertFalse(\mb_strpos($signature, '='));
         self::assertFalse(\mb_strpos($signature, '+'));
         self::assertFalse(\mb_strpos($signature, '/'));
@@ -57,7 +57,7 @@ class SecurityTest extends TestCase
 
         $signature = $s->sign($payload);
 
-        self::assertEquals('cG5bAdaEMac', $signature);
+        self::assertEquals('T5v8rp-cI40', $signature);
         self::assertFalse(\mb_strpos($signature, '='));
         self::assertFalse(\mb_strpos($signature, '+'));
         self::assertFalse(\mb_strpos($signature, '/'));

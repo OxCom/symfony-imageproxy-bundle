@@ -23,7 +23,7 @@
         <env name="APP_DEBUG" value="false"/>
 <!--        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>-->
         <env name="XDEBUG_MODE" value="coverage"/>
-        <server name="KERNEL_CLASS" value="Tests\Functional\app\AppKernel"/>
+        <server name="KERNEL_CLASS" value="Tests\Functional\app\AppKernel" />
     </php>
     <testsuites>
         <testsuite name="Project Test Suite">

@@ -79,13 +79,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                '4ZuzK5flQncpAJTm06kNLZgjfBF9Uvg-9IbzUzgQiFU',
+                'jtQ3I5whBLtbs85xD26yECxFIm29nzNrn9ROk5vBfuQ',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'ZDEAv4k8CrDcXwcOeqNkb5zK3pdyF8k21KIT_zlQ8zM',
+                'ah29tGoAcM97vqM0dGjcRIwQ3Mdgz7NPCrOT-1o9pMg',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -121,13 +121,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'WhFQ9qDT8x7AJ-kkZ8r1B2FGZR4cBxC5nAl-Tn2fRlk',
+                'E1cBecdqB6zkXp041gbvcNJldc7dOxeqvTCDo_33HNM',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'VZDWTO4t5emfTedoHXDlRjThxFmUOIoGVvysZLDvF0E',
+                'rq4N9iEMrGUAhIpMypbK-7dLr3WX-gpa0n8q4TR8iI8',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -163,13 +163,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'rvd5ARX2BnIEUX-YdG6pjW9sJJxtObJeq-7qqasvVB0',
+                'QqY3iTkr42sC4qFsU-G9HVACtRro-8Rf72EcoUGPAcI',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                '1w7nIfoTrCIIQPBl71RkQ368qXXImiVPVEe1gVCpG98',
+                'OTfaX-TMSPFNeKgPPN3RZ4Q3WICT67bhuIQxIs9X1CI',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -205,13 +205,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'KusQZACqKGtRROqNRw9XI-FymSN5_jF1Uf5vw9o6fAY',
+                'rAZRT3ErCkjspdBOuWa0pxQ3GK1T0w_yn55V51gyorg',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'WivjLnXvjCvdIxgwa5HSTEgbOQimJYB6K0WgPNrUjhw',
+                'I8ds9XUcaCC5dJjzGyvpyqJgGY20wi-Q8wZSp51deGA',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -247,13 +247,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'fIMZOe6sFyHfg7nOPC1RE2n5FPnGUN0cF_XAc73iciE',
+                'hpijWw5oUgIJjl-ShSXNH9zW3qOH4wf_5RW3bwxAyDI',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'ws3sBthJ0pC3mgQLzZAbtyJJA1MkF4x38e416US-B6c',
+                'ywgqQUBVIDOCqTBMPmx1HXktlxqv2xZRd8FQ8G5jsFI',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -289,13 +289,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'cjrByJoooiA-fuulQXeyYQ__PCswuFgUc9IFRCTCQas',
+                '7ROyDkctUWjsWkdJAnUvN1TS8uYpD5EGv-RSN8utBaU',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'x--ZvCZEDxLDm--6BMFQ_SOmWbRdtl55mfR4z7Mpbfc',
+                'FqEm3K5tQMdbDYrglmOmJGuWH895bT9PyviwjG781Qo',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -331,13 +331,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                '6QtWBzsJzMgYlZp3skIw1yqlUiOzBkLCqi3Yka9ZfFg',
+                'HsNGkuQkgZ9S-KtPrPLv71t2wHGZjj8NtVgRsyg8Q0w',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'mLtLRKOlWlUOetwm2dDDDCsnS4JJRBCtxaDdMk8IMoo',
+                'IGcZECl0lUi-MRYYbd49RSiqloSlJUEAC5bqAuIONXc',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -373,13 +373,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'IYf2dFQH2b0h5-EZWdfnmQ2p5-DIWvdIQ32mJK7CtOw',
+                'x6gIo8cmk4PnLLEMQn1Zb6a-d8S9Qm-YRtWf_csy6cA',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'UeX7qMDFxjxrja21_UlTeDNd3-aoFtXgk6MFngLrKCw',
+                '1JSwN3pL0S-4XAePoOgdYc-Y0J3iOUnE5y3a_Itmok8',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -415,13 +415,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'pvUSHMEoxBpdO04lSb86hVute9llZ5Je8KMrPZkqQ1o',
+                'wAwihJuBjiSnEOOPJ976VEaNRRMnp6T03xCWU-sZno8',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'jqagygpgF6xWEEHfMAYvTFedqjmEbyNZf1_-G-6tr2g',
+                'iV92ktHke8mSHYo0bL2v_dyKdYN7vAZvnKB34utKStE',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -452,8 +452,8 @@ class BuilderTest extends TestCase
         return [
             [false, 'unsafe', ImgProxy::RESIZE_TYPE_FIT],
             [false, 'unsafe', ImgProxy::RESIZE_TYPE_FILL],
-            [true, 'bAdpOGNzrgE8q2SHx6r9reD-dknZHEoSGRp9X1aUdXM', ImgProxy::RESIZE_TYPE_FIT],
-            [true, 'UPaXrIMHuY-Or_qibSLlfg0wV2QnIcShX0i0hB3ST9c', ImgProxy::RESIZE_TYPE_FILL],
+            [true, 'rHQIIV3WcYtFMhdv0bDv1dmAjlGURAth3a_VkyXy1dA', ImgProxy::RESIZE_TYPE_FIT],
+            [true, 'tcLCrY0E0v9xbZupH55LoI9GQC1slCPZcrcjb110jps', ImgProxy::RESIZE_TYPE_FILL],
         ];
     }
 
@@ -487,13 +487,13 @@ class BuilderTest extends TestCase
             [false, 'unsafe', ImgProxy::SOURCE_TYPE_BASE64, 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp'],
             [
                 true,
-                'gZySmmOp7MjA2pUDCakkhrvmO7BnWfldVDK_53o0u3k',
+                'bNGfNfBusP3uznF8u6nvaVGA8V3muAUWqDT1OeS_2NM',
                 ImgProxy::SOURCE_TYPE_PLAIN,
                 'plain/https://awesome.com/awesome/image.jpg@webp',
             ],
             [
                 true,
-                'IaW0BovXjOMZAzC9edAIOy2Gf2XCuNbkt3bTzjnH2Y4',
+                'qzF_0UlpGZ3mTtOjms8ouyrl-on-w35KmKup8dKqjak',
                 ImgProxy::SOURCE_TYPE_BASE64,
                 'aHR0cHM6Ly9hd2Vzb21lLmNvbS9hd2Vzb21lL2ltYW/dlLmpwZw.webp',
             ],
@@ -525,9 +525,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'z:0.5', 0.5, null],
             [false, 'unsafe', 'z:0.5:0.7', 0.5, 0.7],
             [false, 'unsafe', 'z:0.33', 0.33, 0.33],
-            [true, 'sNFs_ZM5cBSSRXb6hZsbyzPYUhx6P4xJseppd4MIeYc', 'z:0.5', 0.5, null],
-            [true, 'RNi4R9HNy-uZ7IfsAGh4zPxBWM4_9uETOGaLjjZWQqY', 'z:0.5:0.7', 0.5, 0.7],
-            [true, 'xc_MFz4udqxjn-tkJ7yBwhWX1J9MLft9Puiw8jfUcK8', 'z:0.33', 0.33, 0.33],
+            [true, 'kao3RgWcIBtFxsYahGXd2-Mm-nZCytph7vpmIDNY-b4', 'z:0.5', 0.5, null],
+            [true, 'zPMU7alxq-7MG1cddx8mmbKSJxXJY008xSdaR_Fm2eI', 'z:0.5:0.7', 0.5, 0.7],
+            [true, '2_9bzlV9YdbCbrsACGNcZaIFKq5q15OYl2YkYZqgodU', 'z:0.33', 0.33, 0.33],
         ];
     }
 
@@ -559,9 +559,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'toPng', 'png'],
             [false, 'unsafe', 'toJpeg', 'jpg'],
             [false, 'unsafe', 'toWebP', 'webp'],
-            [true, '6ZwNkrNUfCyPIB20pjsJSEvVxpAqo2y_K07j9fwL4vA', 'toPng', 'png'],
-            [true, 'ujhiDwdFuobz7gVIbodu6qYnlvtv5dqZde0K4u4632E', 'toJpeg', 'jpg'],
-            [true, '8bG3BQeX_0CfrQyUufqJ1xe_ERMsuaMtnQXS3qWONJ8', 'toWebP', 'webp'],
+            [true, '1MXYS2HZX_kx4Mc48G2A3FHYBbFQcdZOG93cGF36lBI', 'toPng', 'png'],
+            [true, 'B4C-i6nQK7BcM1pkDur2ASESNFXFqJj9yFoFFAgpf80', 'toJpeg', 'jpg'],
+            [true, '8k-2Oaymn9_jlxxMWXra6E0UeSwTSb1O83Kx0iYwBSI', 'toWebP', 'webp'],
         ];
     }
 
@@ -600,9 +600,9 @@ class BuilderTest extends TestCase
             [false, 'unsafe', 'toPng', 'png'],
             [false, 'unsafe', 'toJpeg', 'jpg'],
             [false, 'unsafe', 'toWebP', 'webp'],
-            [true, 'ednUiSeCvzf3vDi8Eu5ag8btNC4dh2HlgxPc3SPu8GM', 'toPng', 'png'],
-            [true, 'IRdxxLt4cpMIyXejdaFixyP5duHGtRsxZp_gRygnUr8', 'toJpeg', 'jpg'],
-            [true, 'wqauSTfykiNRShXvrXrEwg7QRKekEWXJvVzvzewoEW4', 'toWebP', 'webp'],
+            [true, 'C1eUqt2bBdFHw9mNIkUfXtljxzu1AknswKYvApjOyKM', 'toPng', 'png'],
+            [true, 'hqdxqvP2M0v6z8exnu87mJFI4BMKpi6uTZ3RoeSN7cE', 'toJpeg', 'jpg'],
+            [true, 'o5KSJpzJ_KNTZrAF-HbnLle8Zcg7VLatlo8et5adfTQ', 'toWebP', 'webp'],
         ];
     }
 }

@@ -11,7 +11,9 @@ class Security
     {
         if ($key !== '') {
             try {
-                $this->key = \pack('H', \mb_strtoupper($key));
+                $key = \mb_strtoupper($key);
+                \pack('H', $key);
+                $this->key = \hex2bin($key);
             } catch (\Throwable $e) {
                 throw new \InvalidArgumentException('The sign key must be hex-encoded string', $e->getCode(), $e);
             }
@@ -19,7 +21,9 @@ class Security
 
         if ($salt !== '') {
             try {
-                $this->salt = \pack('H', \mb_strtoupper($salt));
+                $salt = \mb_strtoupper($salt);
+                \pack('H', $salt);
+                $this->salt = \hex2bin($salt);
             } catch (\Throwable $e) {
                 throw new \InvalidArgumentException('The sign key must be hex-encoded string', $e->getCode(), $e);
             }
@@ -33,7 +37,12 @@ class Security
      */
     public function sign(string $payload): string
     {
-        $signature = \hash_hmac('sha256', $this->salt . $payload, $this->key, true);
+        $payload = \implode('/', [
+            $this->salt,
+            $payload
+        ]);
+
+        $signature = \hash_hmac('sha256', $payload, $this->key, true);
 
         return $this->encode($this->crop($signature));
     }
